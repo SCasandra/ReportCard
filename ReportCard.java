@@ -32,7 +32,10 @@ public class ReportCard {
     }
 
     public void addGrade(Course course, Double grade) {
-        grades[courseIndex.get(course)].add(grade);
+	if(grade > 0)
+	{
+       	     grades[courseIndex.get(course)].add(grade);
+	}
     }
 
     public void removeGrade(Course course, int position) {
@@ -55,43 +58,12 @@ public class ReportCard {
         return (Double) grades[courseIndex.get(course)].get(grades[courseIndex.get(course)].size() - 1);
     }
 
+    @Override
     public String toString() {
         return "ReportCard{" +
                 "year=" + year +
                 ", courseIndex=" + courseIndex +
                 ", grades=" + Arrays.toString(grades) +
                 '}';
-    }
-
-    public static void main() {
-        // Test
-        List[] list = new ArrayList[3];
-        List mathList = new ArrayList();
-        List scienceList = new ArrayList();
-        List technologyList = new ArrayList();
-
-        mathList.add(9.3);
-        scienceList.add(5.0);
-        technologyList.add(4.4);
-        technologyList.add(8.4);
-
-        list[0] = (mathList);
-        list[1] = (scienceList);
-        list[2] = (technologyList);
-
-        ReportCard reportCard = new ReportCard(0);
-        reportCard.setGrades(list);
-        reportCard.addGrade(Course.Science, 6.7);
-        reportCard.addGrade(Course.Math, 8.7);
-        reportCard.addGrade(Course.Math, 9.9);
-        reportCard.addGrade(Course.Math, 5.0);
-        reportCard.addGrade(Course.Math, 10.0);
-        reportCard.removeGrade(Course.Math, 2);
-
-        System.out.println(reportCard.toString());
-        System.out.println("last math grade: " + reportCard.getLastCourseGrade(Course.Math));
-        System.out.println("math grades: " + reportCard.getCourseGrades(Course.Math));
-        System.out.println("year: " + reportCard.getYear());
-
     }
 }
